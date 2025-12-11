@@ -33,7 +33,6 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/history" element={<HistoryPage />} />
           <Route path="/settings" element={<SettingsPage />} />
-          {/* Catch-all route */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
