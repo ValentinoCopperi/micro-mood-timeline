@@ -40,7 +40,7 @@ function App() {
   );
 }
 
-// 404 component
+
 function NotFound() {
   return (
     <div className="max-w-2xl mx-auto px-4 py-16 text-center">
