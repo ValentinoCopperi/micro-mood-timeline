@@ -5,7 +5,7 @@
  * Transforms mood entries into timeline segments with colors and animations.
  */
 
-import { useMemo, useCallback } from 'react';
+import { useMemo } from 'react';
 import { useTodayMoods } from '@/api/queries';
 import type { MoodEntry, MoodCategory, TimelineSegment } from '@/types';
 import { MOOD_COLORS } from '@/types';
@@ -28,17 +28,10 @@ interface TimelineData {
   dominantMood: MoodCategory | null;
 }
 
-const DEFAULT_OPTIONS: Required<UseTimelineOptions> = {
-  windowMs: 24 * 60 * 60 * 1000,
-  segmentMs: 30 * 60 * 1000,
-  includeEmpty: false,
-};
-
-export function useTimeline(options: UseTimelineOptions = {}): TimelineData & {
+export function useTimeline(_options: UseTimelineOptions = {}): TimelineData & {
   isLoading: boolean;
   refetch: () => void;
 } {
-  const mergedOptions = { ...DEFAULT_OPTIONS, ...options };
   const { data, isLoading, refetch } = useTodayMoods();
   
   const entries = data?.data ?? [];

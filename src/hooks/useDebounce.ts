@@ -34,7 +34,7 @@ export function useDebouncedCallback<T extends (...args: Parameters<T>) => Retur
   callback: T,
   delay: number = config.debounceDelay
 ): (...args: Parameters<T>) => void {
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const callbackRef = useRef(callback);
 
   // Keep callback ref up to date

@@ -10,7 +10,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useCreateMood } from '@/api/queries';
 import { useSettingsStore, selectQuickCategories } from '@/stores/settingsStore';
 import { MOOD_EMOJIS, MOOD_COLORS, MOOD_LEVEL_LABELS, type MoodCategory, type MoodLevel } from '@/types';
-import { useDebouncedCallback } from '@/hooks/useDebounce';
 
 interface QuickMoodInputProps {
   onMoodLogged?: () => void;
@@ -50,11 +49,6 @@ export function QuickMoodInput({ onMoodLogged, showLevel = true }: QuickMoodInpu
       }
     );
   }, [selectedCategory, selectedLevel, createMood, onMoodLogged]);
-
-  // Debounced level change for smooth slider
-  const handleLevelChange = useDebouncedCallback((level: MoodLevel) => {
-    setSelectedLevel(level);
-  }, 50);
 
   return (
     <div className="space-y-4">

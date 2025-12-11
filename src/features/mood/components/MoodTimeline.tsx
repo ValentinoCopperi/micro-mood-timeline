@@ -5,8 +5,8 @@
  * Features gradient transitions, pulse animations, and real-time updates.
  */
 
-import { useMemo, useRef, useEffect } from 'react';
-import { motion, AnimatePresence, useSpring, useTransform } from 'framer-motion';
+import { useRef, useEffect } from 'react';
+import { motion, useSpring } from 'framer-motion';
 import { useTimeline, useTimelineGradient } from '@/hooks/useTimeline';
 import { MOOD_COLORS, MOOD_EMOJIS, type MoodCategory } from '@/types';
 import { format } from 'date-fns';
@@ -22,7 +22,7 @@ export function MoodTimeline({
   showLabels = true,
   height = 120 
 }: MoodTimelineProps) {
-  const { segments, currentMood, dominantMood, totalEntries, isLoading } = useTimeline();
+  const { segments, currentMood, totalEntries, isLoading } = useTimeline();
   const gradient = useTimelineGradient(segments);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 

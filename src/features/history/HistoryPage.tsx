@@ -6,13 +6,12 @@
  */
 
 import { useState, useMemo, Suspense } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { format, startOfDay, endOfDay, subDays, startOfWeek, endOfWeek, startOfMonth, endOfMonth } from 'date-fns';
+import { motion } from 'framer-motion';
+import { startOfDay, endOfDay, startOfWeek, endOfWeek, startOfMonth, endOfMonth } from 'date-fns';
 import { useMoodsSuspense } from '@/api/queries';
-import { MoodEntryList, MoodDistribution } from '@/features/mood/components';
-import { Card, CardHeader, CardTitle, CardDescription, Button, MoodEntrySkeleton } from '@/shared/components';
+import { MoodEntryList } from '@/features/mood/components';
+import { Card, MoodEntrySkeleton } from '@/shared/components';
 import { MOOD_COLORS, MOOD_EMOJIS, type MoodCategory, type MoodFilter } from '@/types';
-import { useDebouncedState } from '@/hooks/useDebounce';
 
 type DateRange = 'today' | 'week' | 'month' | 'all' | 'custom';
 
@@ -119,7 +118,6 @@ function FilterPanel({
                 `}
                 style={{
                   backgroundColor: `${MOOD_COLORS[category]}30`,
-                  ringColor: selectedCategories.includes(category) ? MOOD_COLORS[category] : 'transparent',
                 }}
               >
                 {MOOD_EMOJIS[category]}
