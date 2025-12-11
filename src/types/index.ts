@@ -1,4 +1,3 @@
-// Core mood types
 export type MoodLevel = 1 | 2 | 3 | 4 | 5;
 
 export type MoodCategory = 
@@ -27,19 +26,16 @@ export interface MoodFilter {
   levels?: MoodLevel[];
 }
 
-// Theme types
 export type Theme = 'light' | 'dark' | 'system';
 
-// Settings types
 export interface UserSettings {
   theme: Theme;
   enableRealtime: boolean;
   enableNotifications: boolean;
   quickMoodCategories: MoodCategory[];
-  defaultMoodDuration: number; // in minutes
+  defaultMoodDuration: number;
 }
 
-// API response types
 export interface ApiResponse<T> {
   data: T;
   success: boolean;
@@ -54,7 +50,6 @@ export interface PaginatedResponse<T> extends ApiResponse<T[]> {
   hasMore: boolean;
 }
 
-// Real-time event types
 export type RealtimeEventType = 
   | 'mood:created'
   | 'mood:updated'
