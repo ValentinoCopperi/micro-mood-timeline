@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#6366f1" />
+    <meta name="description" content="MicroMood - A minimal, fast, real-time mood tracker for 5-second check-ins" />
+    
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧘</text></svg>" />
+    
+    <title>MicroMood - Mindful Moments</title>
+    
+    <!-- PWA manifest (optional) -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <style>
+      /* Critical CSS for initial load */
+      :root {
+        --color-bg-primary: #fefefe;
+        --color-text-primary: #0f172a;
+        --color-accent-primary: #6366f1;
+      }
+      
+      .dark {
+        --color-bg-primary: #0a0a0f;
+        --color-text-primary: #f8fafc;
+      }
+      
+      html, body {
+        margin: 0;
+        padding: 0;
+        background-color: var(--color-bg-primary);
+        color: var(--color-text-primary);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+      
+      /* Initial loading state */
+      #root:empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+      
+      #root:empty::after {
+        content: '';
+        width: 32px;
+        height: 32px;
+        border: 3px solid var(--color-accent-primary);
+        border-top-color: transparent;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+    </style>
+    
+    <!-- Inline script for theme initialization (prevents flash) -->
+    <script>
+      (function() {
+        try {
+          const stored = localStorage.getItem('micromood-settings');
+          if (stored) {
+            const settings = JSON.parse(stored);
+            let theme = settings.state?.theme || 'system';
+            if (theme === 'system') {
+              theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+            document.documentElement.setAttribute('data-theme', theme);
+            if (theme === 'dark') {
+              document.documentElement.classList.add('dark');
+            }
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
